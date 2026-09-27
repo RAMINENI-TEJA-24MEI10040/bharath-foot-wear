@@ -1384,16 +1384,17 @@
     }
 
     @media (max-width: 768px) {
-      .container { padding: 0 12px; }
+      .container { padding: 0 10px; }
       .site-header { height: auto; }
-      .header-inner { height: 62px; gap: 6px; justify-content: space-between; }
+      .header-inner { height: 58px; gap: 4px; justify-content: space-between; align-items: center; flex-wrap: nowrap; }
 
-      .brand-logo-img { width: 36px; height: 36px; }
-      .brand-title { font-size: 0.92rem; }
+      .brand-logo-wrap { gap: 6px; flex-shrink: 1; min-width: 0; }
+      .brand-logo-img { width: 32px; height: 32px; flex-shrink: 0; }
+      .brand-title { font-size: 0.82rem; white-space: nowrap; }
       .brand-subtitle { display: none; }
 
       .nav-menu { display: none; }
-      .mobile-nav-toggle { display: block; font-size: 1.3rem; padding: 4px 6px; }
+      .mobile-nav-toggle { display: block !important; font-size: 1.3rem !important; padding: 4px 5px !important; line-height: 1; flex-shrink: 0; }
 
       .mobile-only-owner-item {
         display: block;
@@ -1439,7 +1440,7 @@
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 62px;
+        top: 58px;
         left: 0;
         width: 100%;
         background: var(--bg-surface);
@@ -1489,9 +1490,11 @@
       .digital-bill-sheet { padding: 16px 12px !important; width: 100% !important; box-sizing: border-box !important; }
       .bill-sheet-header { flex-direction: row !important; align-items: flex-start !important; justify-content: space-between !important; }
       .bill-header-right-logo { width: 70px !important; height: 70px !important; }
-      .header-actions-right { gap: 8px !important; flex-shrink: 0; }
-      .header-actions-right .lang-switcher-wrap { display: none !important; }
-      .btn-owner { padding: 6px 10px !important; font-size: 0.75rem !important; }
+
+      .header-actions-right { gap: 4px !important; flex-shrink: 0; align-items: center !important; }
+      .header-actions-right .lang-switcher-wrap { display: flex !important; visibility: visible !important; opacity: 1 !important; padding: 2px !important; flex-shrink: 0; }
+      .header-actions-right .lang-btn { padding: 3px 5px !important; font-size: 0.65rem !important; border-radius: 12px !important; }
+      .btn-owner { padding: 5px 8px !important; font-size: 0.7rem !important; white-space: nowrap !important; }
 
       .form-grid-3, .form-grid-2 {
         grid-template-columns: 1fr !important;
@@ -1512,6 +1515,10 @@
     }
 
     @media (max-width: 480px) {
+      .brand-title { font-size: 0.76rem !important; }
+      .header-actions-right { gap: 3px !important; }
+      .header-actions-right .lang-btn { padding: 2px 4px !important; font-size: 0.6rem !important; }
+      .btn-owner { padding: 4px 6px !important; font-size: 0.65rem !important; }
       .modal-overlay {
         padding: 6px !important;
       }
