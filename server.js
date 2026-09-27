@@ -29,11 +29,13 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-// User Turso Cloud SQLite Database URL
+// User Turso Cloud SQLite Database URL & Auth Token
 const DEFAULT_TURSO_URL = 'libsql://bharath-foot-wear-bharathfootwear.aws-ap-south-1.turso.io';
+const DEFAULT_TURSO_TOKEN = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3OTA1MzAxNjAsImlkIjoiMDFhMGUzY2EtYWUwMS03YTE1LWJjMTItZjdjMTUwMWM5MWJiIiwia2lkIjoiOWlMUl9yYlZoMllhOTFiSEhqLUN1SzFOekZSVzdEM2ppX2I0ZGc5MEZrUSIsInJpZCI6IjQwZGJmOWZjLTNhMDUtNDZhMi1hNWM3LTRlMmI2ZDliMDlhZSJ9.7TnmoLttZWV7pbUr4uRwdr2BTqo1OWHQZgo7zBoDSkaXE2Ug_eE4xJH-FNg_UaE1Q5I6WGf26cMhzWeHBPP_AQ';
+
 const TURSO_URL = process.env.TURSO_DATABASE_URL || DEFAULT_TURSO_URL;
-const TURSO_TOKEN = process.env.TURSO_AUTH_TOKEN;
-const isTursoEnabled = Boolean(TURSO_URL && (TURSO_TOKEN || process.env.TURSO_DATABASE_URL));
+const TURSO_TOKEN = process.env.TURSO_AUTH_TOKEN || DEFAULT_TURSO_TOKEN;
+const isTursoEnabled = Boolean(TURSO_URL && TURSO_TOKEN);
 
 let tursoClient = null;
 let sqliteDb = null;
