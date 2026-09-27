@@ -2912,7 +2912,7 @@
           document.getElementById('owner-dashboard-view').style.display = 'block';
           initBillForm();
         } else {
-          showToast('❌ Incorrect Security PIN. Try 2002 or 9059613235');
+          showToast('❌ Incorrect Security PIN. Please try again.');
         }
       } catch (err) {
         if (pinVal === '2002' || pinVal === '9059613235' || pinVal === '') {
@@ -2923,7 +2923,7 @@
           document.getElementById('owner-dashboard-view').style.display = 'block';
           initBillForm();
         } else {
-          showToast('❌ Incorrect Security PIN. Try 2002 or 9059613235');
+          showToast('❌ Incorrect Security PIN. Please try again.');
         }
       }
     }
