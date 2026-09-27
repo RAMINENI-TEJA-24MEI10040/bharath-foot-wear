@@ -1095,6 +1095,71 @@
 
     .owner-portal-body { padding: 24px; }
 
+    /* Owner Login View Mobile Styling */
+    .owner-login-box {
+      text-align: center;
+      max-width: 380px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+
+    .owner-login-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .owner-login-heading {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .owner-login-subtext {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .owner-pin-field {
+      text-align: center !important;
+      font-size: 1.15rem !important;
+      letter-spacing: 0.25em !important;
+      height: 48px !important;
+      border-radius: 6px !important;
+    }
+
+    .owner-unlock-btn {
+      width: 100% !important;
+      cursor: pointer;
+      height: 48px !important;
+      font-size: 1rem !important;
+      font-weight: 700 !important;
+      border-radius: 6px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .bill-action-btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     .portal-tab-nav {
       display: flex;
       gap: 10px;
@@ -1384,9 +1449,57 @@
       .btn-owner { padding: 5px 9px !important; font-size: 0.72rem !important; }
       .lang-switcher-wrap { padding: 2px !important; display: flex !important; visibility: visible !important; opacity: 1 !important; flex-shrink: 0; }
       .lang-btn { padding: 4px 6px !important; font-size: 0.68rem !important; display: inline-block !important; }
+
+      .form-grid-3, .form-grid-2 {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .bill-action-btn-group .btn {
+        width: 100% !important;
+      }
+      .portal-tab-nav {
+        flex-direction: column !important;
+        gap: 8px !important;
+      }
+      .portal-tab-nav .portal-tab-btn {
+        width: 100% !important;
+        text-align: center !important;
+        margin-left: 0 !important;
+      }
     }
 
     @media (max-width: 480px) {
+      .modal-overlay {
+        padding: 6px !important;
+      }
+      .owner-portal-card {
+        max-height: 96vh !important;
+        border-radius: 8px !important;
+      }
+      .owner-portal-header {
+        padding: 14px 16px !important;
+      }
+      .owner-portal-title {
+        font-size: 1.1rem !important;
+      }
+      .owner-portal-body {
+        padding: 16px 12px !important;
+      }
+      .owner-login-box {
+        margin: 10px auto !important;
+        padding: 0 !important;
+      }
+      .owner-login-icon {
+        font-size: 2.5rem !important;
+        margin-bottom: 6px !important;
+      }
+      .owner-login-heading {
+        font-size: 1.35rem !important;
+      }
+      .owner-login-subtext {
+        font-size: 0.8125rem !important;
+        margin-bottom: 16px !important;
+      }
       .container { padding: 0 8px; }
       .brand-title { font-size: 0.84rem; }
       .owner-btn-text { display: none; }
@@ -2069,7 +2182,7 @@
           <div id="portal-tab-create-bill">
             <form id="digital-bill-form" onsubmit="event.preventDefault(); generateBillPreview();">
               
-              <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px;">
+              <div class="form-grid-3">
                 <div class="form-group">
                   <label class="form-label">Customer Name (Optional)</label>
                   <input type="text" id="bill-cust-name" class="form-input" placeholder="e.g. K. Rama Rao (Optional)">
@@ -2084,7 +2197,7 @@
                 </div>
               </div>
 
-              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+              <div class="form-grid-2">
                 <div class="form-group">
                   <label class="form-label">Invoice Number (Fixed Automated Series)</label>
                   <input type="text" id="bill-inv-no" class="form-input" readonly style="font-weight:700; color:var(--brand-red); background:#F0ECE1; cursor:not-allowed;">
@@ -2104,23 +2217,25 @@
                 Item Details
               </h4>
 
-              <table class="bill-items-table">
-                <thead>
-                  <tr>
-                    <th style="width:25%;">Brand Name</th>
-                    <th style="width:35%;">Item Type / Category</th>
-                    <th style="width:18%;">Size / Note</th>
-                    <th style="width:10%;">Qty</th>
-                    <th style="width:12%;">Price (₹)</th>
-                    <th style="width:15%;">Total (₹)</th>
-                  </tr>
-                </thead>
-                <tbody id="bill-items-body">
-                  <!-- Single item row initialized via JS -->
-                </tbody>
-              </table>
+              <div style="overflow-x:auto; -webkit-overflow-scrolling:touch; width:100%; margin-bottom:16px;">
+                <table class="bill-items-table" style="min-width:580px;">
+                  <thead>
+                    <tr>
+                      <th style="width:25%;">Brand Name</th>
+                      <th style="width:35%;">Item Type / Category</th>
+                      <th style="width:18%;">Size / Note</th>
+                      <th style="width:10%;">Qty</th>
+                      <th style="width:12%;">Price (₹)</th>
+                      <th style="width:15%;">Total (₹)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bill-items-body">
+                    <!-- Single item row initialized via JS -->
+                  </tbody>
+                </table>
+              </div>
 
-              <div style="display:flex; justify-content:space-between; align-items:center; background:#FAF6F0; padding:16px; border-radius:4px; border:1px solid var(--border-subtle); margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; background:#FAF6F0; padding:16px; border-radius:4px; border:1px solid var(--border-subtle); margin-bottom:20px; flex-wrap:wrap; gap:12px;">
                 <div>
                   <label class="form-label">Discount (Optional ₹)</label>
                   <input type="number" id="bill-discount" class="form-input" value="0" min="0" oninput="calculateBillTotals()" style="width:140px;">
@@ -2131,7 +2246,7 @@
                 </div>
               </div>
 
-              <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <div class="bill-action-btn-group">
                 <button type="button" class="btn btn-gold" onclick="generateBillPreview()">
                   👁️ Generate Bill Preview
                 </button>
