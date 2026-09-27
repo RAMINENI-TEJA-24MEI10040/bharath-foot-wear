@@ -1,12 +1,11 @@
 /**
- * BHARATH FOOT WEAR — Official Store Backend & Device SQL Storage
- * Express backend integrated with SQLite 3 local database & Turso Cloud SQLite.
+ * BHARATH FOOT WEAR — Official Store Backend & Database Integration
+ * Express backend integrated with Turso Cloud SQLite / LibSQL storage.
  */
 
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const sqlite3 = require('sqlite3').verbose();
 const { createClient } = require('@libsql/client');
 
 const app = express();
@@ -35,67 +34,26 @@ const DEFAULT_TURSO_TOKEN = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLC
 
 const TURSO_URL = process.env.TURSO_DATABASE_URL || DEFAULT_TURSO_URL;
 const TURSO_TOKEN = process.env.TURSO_AUTH_TOKEN || DEFAULT_TURSO_TOKEN;
-const isTursoEnabled = Boolean(TURSO_URL && TURSO_TOKEN);
 
-let tursoClient = null;
-let sqliteDb = null;
+console.log('⚡ Initializing LibSQL Cloud Database Connection:', TURSO_URL);
+const dbClient = createClient({
+  url: TURSO_URL,
+  authToken: TURSO_TOKEN
+});
 
-if (isTursoEnabled) {
-  console.log('⚡ Initializing Turso Cloud SQLite Database Connection...');
-  tursoClient = createClient({
-    url: TURSO_URL,
-    authToken: TURSO_TOKEN
-  });
-  console.log('✅ Connected to Turso Cloud SQLite Database at:', TURSO_URL);
-} else {
-  const DB_PATH = path.join(__dirname, 'bharath_footwear.db');
-  sqliteDb = new sqlite3.Database(DB_PATH, (err) => {
-    if (err) {
-      console.error('❌ Error connecting to local SQLite database:', err.message);
-    } else {
-      console.log('✅ Connected to Local SQLite database file at:', DB_PATH);
-    }
-  });
-}
-
-// Database helper functions supporting both local SQLite and Turso Cloud
+// Database helper functions supporting LibSQL
 async function dbAll(sql, params = []) {
-  if (isTursoEnabled) {
-    const res = await tursoClient.execute({ sql, args: params });
-    return res.rows;
-  }
-  return new Promise((resolve, reject) => {
-    sqliteDb.all(sql, params, (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows || []);
-    });
-  });
+  const res = await dbClient.execute({ sql, args: params });
+  return res.rows;
 }
 
 async function dbGet(sql, params = []) {
-  if (isTursoEnabled) {
-    const res = await tursoClient.execute({ sql, args: params });
-    return res.rows[0] || null;
-  }
-  return new Promise((resolve, reject) => {
-    sqliteDb.get(sql, params, (err, row) => {
-      if (err) reject(err);
-      else resolve(row || null);
-    });
-  });
+  const res = await dbClient.execute({ sql, args: params });
+  return res.rows[0] || null;
 }
 
 async function dbRun(sql, params = []) {
-  if (isTursoEnabled) {
-    await tursoClient.execute({ sql, args: params });
-    return;
-  }
-  return new Promise((resolve, reject) => {
-    sqliteDb.run(sql, params, function(err) {
-      if (err) reject(err);
-      else resolve(this);
-    });
-  });
+  await dbClient.execute({ sql, args: params });
 }
 
 // Initialize database schema tables asynchronously
@@ -160,15 +118,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(express.static(__dirname));
 
-// Health Check API with SQLite Status
 app.get('/api/health', async (req, res) => {
   try {
     const row = await dbGet('SELECT COUNT(*) as count FROM bills');
     res.json({
       status: 'online',
-      database: isTursoEnabled ? 'Turso Cloud SQLite' : 'SQLite 3 (Local Device Storage)',
-      isCloud: isTursoEnabled,
-      dbFile: isTursoEnabled ? TURSO_URL : 'bharath_footwear.db',
+      database: 'Turso Cloud SQLite (LibSQL)',
+      isCloud: true,
+      dbFile: TURSO_URL,
       dbStatus: 'connected',
       savedBillsCount: row ? Number(row.count) : 0,
       uptime: process.uptime(),
@@ -177,7 +134,7 @@ app.get('/api/health', async (req, res) => {
   } catch (err) {
     res.json({
       status: 'online',
-      database: isTursoEnabled ? 'Turso Cloud SQLite' : 'SQLite 3 (Local)',
+      database: 'Turso Cloud SQLite (LibSQL)',
       dbStatus: 'error',
       error: err.message
     });
