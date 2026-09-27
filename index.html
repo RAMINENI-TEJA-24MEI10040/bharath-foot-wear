@@ -397,6 +397,11 @@
       box-shadow: 0 2px 6px rgba(200, 16, 46, 0.3);
     }
 
+    .mobile-only-lang-item,
+    .mobile-only-owner-item {
+      display: none !important;
+    }
+
     .mobile-nav-toggle {
       display: none;
       background: none;
@@ -1484,10 +1489,9 @@
       .digital-bill-sheet { padding: 16px 12px !important; width: 100% !important; box-sizing: border-box !important; }
       .bill-sheet-header { flex-direction: row !important; align-items: flex-start !important; justify-content: space-between !important; }
       .bill-header-right-logo { width: 70px !important; height: 70px !important; }
-      .header-actions-right { gap: 6px !important; flex-shrink: 0; }
-      .btn-owner { padding: 5px 9px !important; font-size: 0.72rem !important; }
-      .lang-switcher-wrap { padding: 2px !important; display: flex !important; visibility: visible !important; opacity: 1 !important; flex-shrink: 0; }
-      .lang-btn { padding: 4px 6px !important; font-size: 0.68rem !important; display: inline-block !important; }
+      .header-actions-right { gap: 8px !important; flex-shrink: 0; }
+      .header-actions-right .lang-switcher-wrap { display: none !important; }
+      .btn-owner { padding: 6px 10px !important; font-size: 0.75rem !important; }
 
       .form-grid-3, .form-grid-2 {
         grid-template-columns: 1fr !important;
@@ -2047,7 +2051,7 @@
             <div class="detail-icon">📍</div>
             <div class="detail-content">
               <h4 id="lbl-addr-title">Store Address</h4>
-              <p id="lbl-addr-text">Main Road, Near Bus Stand, Martur, Bapatla District, Andhra Pradesh 523301</p>
+              <p id="lbl-addr-text">Main Road, Martur, AP 523301</p>
             </div>
           </div>
 
@@ -2146,8 +2150,7 @@
           <div class="footer-heading" id="ft-head-contact">Store Contact</div>
           <p style="font-size:0.84375rem; color:#A0A0A0; line-height:1.6;" id="ft-address-text">
             BHARATH FOOT WEAR<br>
-            Main Road, Near Bus Stand,<br>
-            Martur, AP 523301<br>
+            Main Road, Martur, AP 523301<br>
             Proprietors: Ramineni Veeraiah & Ramineni Srinivasarao<br>
             Phone: <a href="tel:9059613235" style="color:var(--brand-gold);">+91 90596 13235</a>
           </p>
@@ -2318,7 +2321,7 @@
                   <div class="bill-header-left">
                     <h2>BHARATH FOOT WEAR</h2>
                     <p><strong>The Perfect Fit for Everyone Since 2002</strong></p>
-                    <p>Main Road, Near Bus Stand, Martur, Bapatla District, AP 523301</p>
+                    <p>Main Road, Martur, AP 523301</p>
                     <p><strong>Proprietors: Ramineni Veeraiah & Ramineni Srinivasarao</strong> | Phone: +91 90596 13235</p>
                   </div>
                   <img src="/assets/bharath-logo.jpg" alt="Bharath Foot Wear Logo" class="bill-header-right-logo">
@@ -2509,7 +2512,7 @@
         storeOpenNow: "STORE OPEN NOW • CLOSES AT 09:30 PM",
         storeClosed: "STORE CLOSED NOW • OPENS AT 09:00 AM",
         lblAddrTitle: "Store Address",
-        lblAddrText: "Main Road, Near Bus Stand, Martur, Bapatla District, Andhra Pradesh 523301",
+        lblAddrText: "Main Road, Martur, AP 523301",
         lblHoursTitle: "Opening Hours",
         lblHoursText: "Monday – Sunday: 09:00 AM – 09:30 PM (Open 7 Days)",
         lblPropTitle: "Proprietors",
@@ -2640,7 +2643,7 @@
         storeOpenNow: "షాప్ ఇప్పుడు తెరిచి ఉంది • రాత్రి 09:30 వరకు",
         storeClosed: "షాప్ ఇప్పుడు మూసివేయబడింది • ఉదయం 09:00కి తెరుచును",
         lblAddrTitle: "షాప్ చిరునామా",
-        lblAddrText: "మెయిన్ రోడ్, బస్ స్టాండ్ దగ్గర, మార్టూరు, బాపట్ల జిల్లా, ఆంధ్రప్రదేశ్ 523301",
+        lblAddrText: "మెయిన్ రోడ్, మార్టూరు, ఏపీ 523301",
         lblHoursTitle: "తెరిచే వేళలు",
         lblHoursText: "సోమవారం – ఆదివారం: ఉదయం 09:00 – రాత్రి 09:30 (వారంలో 7 రోజులు)",
         lblPropTitle: "ప్రొప్రైటర్లు",
@@ -2771,7 +2774,7 @@
         storeOpenNow: "स्टोर अभी खुला है • रात 09:30 बजे तक",
         storeClosed: "स्टोर अभी बंद है • सुबह 09:00 बजे खुलेगा",
         lblAddrTitle: "स्टोर का पता",
-        lblAddrText: "मेन रोड, बस स्टैंड के पास, मार्टूर, बापटला जिला, आंध्र प्रदेश 523301",
+        lblAddrText: "मेन रोड, मार्टूर, एपी 523301",
         lblHoursTitle: "खुलने का समय",
         lblHoursText: "सोमवार – रविवार: सुबह 09:00 – रात 09:30 (सप्ताह के 7 दिन)",
         lblPropTitle: "प्रोप्राइटर",
