@@ -1386,15 +1386,15 @@
     @media (max-width: 768px) {
       .container { padding: 0 10px; }
       .site-header { height: auto; }
-      .header-inner { height: 58px; gap: 4px; justify-content: space-between; align-items: center; flex-wrap: nowrap; }
+      .header-inner { height: 60px; gap: 6px; justify-content: space-between; align-items: center; flex-wrap: nowrap; }
 
-      .brand-logo-wrap { gap: 6px; flex-shrink: 1; min-width: 0; }
-      .brand-logo-img { width: 32px; height: 32px; flex-shrink: 0; }
-      .brand-title { font-size: 0.82rem; white-space: nowrap; }
+      .brand-logo-wrap { gap: 8px; flex-shrink: 0; }
+      .brand-logo-img { width: 36px; height: 36px; flex-shrink: 0; }
+      .brand-title { font-size: 0.92rem !important; font-weight: 800 !important; color: var(--brand-red) !important; white-space: nowrap !important; }
       .brand-subtitle { display: none; }
 
       .nav-menu { display: none; }
-      .mobile-nav-toggle { display: block !important; font-size: 1.3rem !important; padding: 4px 5px !important; line-height: 1; flex-shrink: 0; }
+      .mobile-nav-toggle { display: none !important; }
 
       .mobile-only-owner-item {
         display: block;
@@ -1489,12 +1489,12 @@
       .store-info-card { padding: 20px 14px; }
       .digital-bill-sheet { padding: 16px 12px !important; width: 100% !important; box-sizing: border-box !important; }
       .bill-sheet-header { flex-direction: row !important; align-items: flex-start !important; justify-content: space-between !important; }
-      .bill-header-right-logo { width: 70px !important; height: 70px !important; }
+      .bill-header-right-logo { width: 95px !important; height: 95px !important; }
 
-      .header-actions-right { gap: 4px !important; flex-shrink: 0; align-items: center !important; }
+      .header-actions-right { gap: 6px !important; flex-shrink: 0; align-items: center !important; }
       .header-actions-right .lang-switcher-wrap { display: flex !important; visibility: visible !important; opacity: 1 !important; padding: 2px !important; flex-shrink: 0; }
-      .header-actions-right .lang-btn { padding: 3px 5px !important; font-size: 0.65rem !important; border-radius: 12px !important; }
-      .btn-owner { padding: 5px 8px !important; font-size: 0.7rem !important; white-space: nowrap !important; }
+      .header-actions-right .lang-btn { padding: 3px 6px !important; font-size: 0.68rem !important; border-radius: 12px !important; }
+      .btn-owner { padding: 5px 9px !important; font-size: 0.72rem !important; white-space: nowrap !important; }
 
       .form-grid-3, .form-grid-2 {
         grid-template-columns: 1fr !important;
@@ -1612,10 +1612,6 @@
             <button class="lang-btn lang-btn-te" onclick="setLanguage('te')" id="btn-lang-te" aria-label="తెలుగుకి మారండి">తెలుగు</button>
             <button class="lang-btn lang-btn-hi" onclick="setLanguage('hi')" id="btn-lang-hi" aria-label="हिन्दी में बदलें">हिन्दी</button>
           </div>
-
-          <button class="mobile-nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
-            ☰
-          </button>
         </div>
 
       </div>
@@ -2280,7 +2276,7 @@
                     <tr>
                       <th style="width:25%;">Brand Name</th>
                       <th style="width:35%;">Item Type / Category</th>
-                      <th style="width:18%;">Size / Note</th>
+                      <th style="width:18%;">Size Select (1–13)</th>
                       <th style="width:10%;">Qty</th>
                       <th style="width:12%;">Price (₹)</th>
                       <th style="width:15%;">Total (₹)</th>
@@ -3007,7 +3003,8 @@
       'CAMPUS',
       'RED CHIEF',
       'LAKHANI',
-      'LIBERTY'
+      'LIBERTY',
+      'Others'
     ];
 
     const AVAILABLE_ITEM_TYPES = [
@@ -3016,10 +3013,10 @@
       "Men's Sports Shoes",
       "Men's Orthopedic Footwear",
       "Men's Flip Flops",
-      "Men's Sandals & Floaters",
+      "Men's Sandals",
       "Men's Daily Slippers",
       "Men's Safety & Work Shoes",
-      "Women's Formal & Heels",
+      "Women's Formal",
       "Women's Casual Shoes",
       "Women's Sports Shoes",
       "Women's Orthopedic Footwear",
@@ -3027,10 +3024,16 @@
       "Women's Sandals",
       "Women's Daily Slippers",
       "Kids' School Shoes",
-      "Kids' Sports Shoes & Sneakers",
+      "Kids' Sports Shoes",
       "Kids' Slippers",
-      "Kids' Sandals & Floaters",
+      "Kids' Sandals",
+      "Socks",
       "Custom Footwear Model"
+    ];
+
+    const AVAILABLE_SIZES = [
+      "Size 1", "Size 2", "Size 3", "Size 4", "Size 5", "Size 6",
+      "Size 7", "Size 8", "Size 9", "Size 10", "Size 11", "Size 12", "Size 13"
     ];
 
     let isOwnerLoggedIn = false;
@@ -3150,6 +3153,7 @@
 
       let brandOptionsHtml = AVAILABLE_BRANDS.map(b => `<option value="${b}">${b}</option>`).join('');
       let typeOptionsHtml = AVAILABLE_ITEM_TYPES.map(t => `<option value="${t}">${t}</option>`).join('');
+      let sizeOptionsHtml = AVAILABLE_SIZES.map((s, idx) => `<option value="${s}" ${idx === 6 ? 'selected' : ''}>${s}</option>`).join('');
 
       tr.innerHTML = `
         <td>
@@ -3163,7 +3167,9 @@
           </select>
         </td>
         <td>
-          <input type="text" class="form-input item-size" placeholder="Size / Note (e.g. Size 8)" style="font-size:0.8125rem;">
+          <select class="form-select item-size">
+            ${sizeOptionsHtml}
+          </select>
         </td>
         <td>
           <input type="number" class="form-input item-qty" value="1" min="1" oninput="calculateBillTotals()" style="text-align:center;">
@@ -3316,8 +3322,8 @@
       // Ensure logo sizing inside clone
       const logo = clone.querySelector('.bill-header-right-logo');
       if (logo) {
-        logo.style.width = '85px';
-        logo.style.height = '85px';
+        logo.style.width = '105px';
+        logo.style.height = '105px';
       }
 
       wrapper.appendChild(clone);
@@ -3496,8 +3502,8 @@
               line-height: 1.4;
             }
             .bill-header-right-logo {
-              width: 85px;
-              height: 85px;
+              width: 105px;
+              height: 105px;
               object-fit: contain;
               border-radius: 50%;
               border: 2px solid #C8102E;
