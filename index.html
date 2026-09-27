@@ -1401,6 +1401,35 @@
         font-weight: 800 !important;
       }
 
+      .mobile-only-lang-item {
+        display: block !important;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .mobile-lang-label {
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: var(--brand-red);
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
+      }
+      .mobile-lang-switcher {
+        display: flex !important;
+        gap: 6px !important;
+        padding: 4px !important;
+        background: var(--bg-card) !important;
+        border-radius: 6px !important;
+        width: 100% !important;
+      }
+      .mobile-lang-switcher .lang-btn {
+        flex: 1;
+        padding: 8px 10px !important;
+        font-size: 0.8rem !important;
+        text-align: center;
+        border-radius: 4px !important;
+      }
+
       .nav-menu.mobile-open {
         display: flex;
         flex-direction: column;
@@ -1543,6 +1572,14 @@
         <!-- Desktop Navigation Links -->
         <nav role="navigation" aria-label="Main Navigation">
           <ul class="nav-menu" id="nav-menu">
+            <li class="mobile-only-lang-item">
+              <div class="mobile-lang-label">🌐 SELECT LANGUAGE / భాష ఎంచుకోండి</div>
+              <div class="lang-switcher-wrap mobile-lang-switcher">
+                <button class="lang-btn lang-btn-en active" onclick="setLanguage('en'); toggleMobileMenu();">EN</button>
+                <button class="lang-btn lang-btn-te" onclick="setLanguage('te'); toggleMobileMenu();">తెలుగు</button>
+                <button class="lang-btn lang-btn-hi" onclick="setLanguage('hi'); toggleMobileMenu();">हिन्दी</button>
+              </div>
+            </li>
             <li><a href="#home" class="nav-link" id="nav-home">Home</a></li>
             <li><a href="#heritage" class="nav-link" id="nav-heritage">Heritage</a></li>
             <li><a href="#awards" class="nav-link" id="nav-awards">Awards</a></li>
@@ -1560,9 +1597,9 @@
           </button>
 
           <div class="lang-switcher-wrap" role="group" aria-label="Language Selector">
-            <button class="lang-btn active" onclick="setLanguage('en')" id="btn-lang-en" aria-label="Switch to English">EN</button>
-            <button class="lang-btn" onclick="setLanguage('te')" id="btn-lang-te" aria-label="తెలుగుకి మారండి">తెలుగు</button>
-            <button class="lang-btn" onclick="setLanguage('hi')" id="btn-lang-hi" aria-label="हिन्दी में बदलें">हिन्दी</button>
+            <button class="lang-btn lang-btn-en active" onclick="setLanguage('en')" id="btn-lang-en" aria-label="Switch to English">EN</button>
+            <button class="lang-btn lang-btn-te" onclick="setLanguage('te')" id="btn-lang-te" aria-label="తెలుగుకి మారండి">తెలుగు</button>
+            <button class="lang-btn lang-btn-hi" onclick="setLanguage('hi')" id="btn-lang-hi" aria-label="हिन्दी में बदलें">हिन्दी</button>
           </div>
 
           <button class="mobile-nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
@@ -2763,8 +2800,7 @@
       document.body.className = `lang-${lang}`;
 
       document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = document.getElementById(`btn-lang-${lang}`);
-      if (activeBtn) activeBtn.classList.add('active');
+      document.querySelectorAll(`.lang-btn-${lang}`).forEach(btn => btn.classList.add('active'));
 
       const dict = translations[lang] || translations.en;
 
