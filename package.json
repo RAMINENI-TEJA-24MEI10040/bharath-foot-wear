@@ -1,0 +1,19 @@
+{
+  "name": "bharath-foot-wear",
+  "version": "2.0.0",
+  "description": "Bespoke Luxury Light Theme and Trilingual Store Website for BHARATH FOOT WEAR",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "express": "^4.21.2",
+    "sqlite3": "^6.0.1"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}
