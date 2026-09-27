@@ -363,8 +363,10 @@
     /* Header Actions */
     .header-actions-right {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 4px;
       flex-shrink: 0;
     }
 
@@ -1491,10 +1493,10 @@
       .bill-sheet-header { flex-direction: row !important; align-items: flex-start !important; justify-content: space-between !important; }
       .bill-header-right-logo { width: 95px !important; height: 95px !important; }
 
-      .header-actions-right { gap: 6px !important; flex-shrink: 0; align-items: center !important; }
-      .header-actions-right .lang-switcher-wrap { display: flex !important; visibility: visible !important; opacity: 1 !important; padding: 2px !important; flex-shrink: 0; }
-      .header-actions-right .lang-btn { padding: 3px 6px !important; font-size: 0.68rem !important; border-radius: 12px !important; }
-      .btn-owner { padding: 5px 9px !important; font-size: 0.72rem !important; white-space: nowrap !important; }
+      .header-actions-right { display: flex !important; flex-direction: column !important; align-items: flex-end !important; justify-content: center !important; gap: 3px !important; flex-shrink: 0; }
+      .header-actions-right .lang-switcher-wrap { display: flex !important; visibility: visible !important; opacity: 1 !important; padding: 1px 3px !important; flex-shrink: 0; }
+      .header-actions-right .lang-btn { padding: 2px 5px !important; font-size: 0.62rem !important; border-radius: 10px !important; }
+      .btn-owner { padding: 4px 8px !important; font-size: 0.68rem !important; white-space: nowrap !important; }
 
       .form-grid-3, .form-grid-2 {
         grid-template-columns: 1fr !important;
@@ -2213,6 +2215,15 @@
             <button type="button" class="btn btn-primary" onclick="verifyOwnerPIN()" style="width:100%; cursor:pointer;">
               Unlock Owner Dashboard
             </button>
+
+            <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--border-subtle); text-align:center;">
+              <div style="font-size:0.75rem; font-weight:800; color:var(--brand-red); margin-bottom:8px;">🌐 SELECT LANGUAGE / భాష ఎంచుకోండి</div>
+              <div class="lang-switcher-wrap" style="display:inline-flex; justify-content:center; padding:4px;">
+                <button type="button" class="lang-btn lang-btn-en active" onclick="setLanguage('en');">EN</button>
+                <button type="button" class="lang-btn lang-btn-te" onclick="setLanguage('te');">తెలుగు</button>
+                <button type="button" class="lang-btn lang-btn-hi" onclick="setLanguage('hi');">हिन्दी</button>
+              </div>
+            </div>
           </div>
         </div>
 
