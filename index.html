@@ -1461,7 +1461,7 @@
           </h1>
 
           <p class="hero-description" id="hero-desc">
-            Welcome to Martur's premier footwear destination. For nearly a quarter century (24 years), BHARATH FOOT WEAR has delivered uncompromised comfort, authentic brand partnerships, and unmatched retail excellence for every family member.
+            Welcome to Martur's premier footwear destination. For nearly a quarter century (24 years), <em style="font-family: var(--font-serif); font-style: italic; font-weight: 700; color: var(--brand-red);">BHARATH FOOTWEAR</em> has delivered uncompromised comfort, authentic brand partnerships, and unmatched retail excellence for every family member.
           </p>
 
           <div class="hero-actions">
@@ -2241,7 +2241,7 @@
         
         heroBadge: "★ 24 YEARS OF FOOTWEAR TRUST IN MARTUR",
         heroTitle: 'The <span class="highlight-text">Perfect Fit</span> For Everyone Since 2002.',
-        heroDesc: "Welcome to Martur's premier footwear destination. For nearly a quarter century (24 years), BHARATH FOOT WEAR has delivered uncompromised comfort, authentic brand partnerships, and unmatched retail excellence for every family member.",
+        heroDesc: 'Welcome to Martur\'s premier footwear destination. For nearly a quarter century (24 years), <em style="font-family: var(--font-serif); font-style: italic; font-weight: 700; color: var(--brand-red);">BHARATH FOOTWEAR</em> has delivered uncompromised comfort, authentic brand partnerships, and unmatched retail excellence for every family member.',
         heroBtnExplore: "Explore Collections",
         heroBtnNav: "📍 Google Maps Location",
         stat1: "Established",
@@ -2649,7 +2649,7 @@
       // Hero
       setHTML('hero-heritage-badge', `<span style="color:var(--brand-red);">★</span> ${dict.heroBadge.replace('★ ', '')}`);
       setHTML('hero-title', dict.heroTitle);
-      setText('hero-desc', dict.heroDesc);
+      setHTML('hero-desc', dict.heroDesc);
       setText('hero-btn-explore', dict.heroBtnExplore);
       setText('hero-btn-navigate', dict.heroBtnNav);
       setText('stat-lbl-1', dict.stat1);
